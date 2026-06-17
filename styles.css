@@ -773,11 +773,45 @@ a {
 }
 
 @media (max-width: 768px) {
+    .navbar {
+        background-color: rgba(15, 16, 20, 0.95);
+        backdrop-filter: blur(10px);
+    }
     .nav-links {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(15, 16, 20, 0.98);
+        padding: 2rem 0;
+        transform: translateY(-150%);
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        z-index: -1;
+        opacity: 0;
+        pointer-events: none;
+        gap: 1.5rem;
+    }
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .nav-links a {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+    .nav-links .btn-outline {
+        margin: 0 auto;
+        width: max-content;
+        padding: 0.8rem 2rem;
     }
     .mobile-toggle {
         display: block;
+        padding: 0.5rem;
     }
     .hero-title {
         font-size: 2.5rem;
@@ -802,9 +836,20 @@ a {
     .timeline-dot {
         left: 24px !important;
     }
+    .horizontal-scroll-container {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-right: 5vw;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    .horizontal-scroll-container::-webkit-scrollbar {
+        display: none;
+    }
     .story-card {
         width: 85vw;
         min-width: unset;
+        scroll-snap-align: center;
     }
     .story-overlay {
         padding: 2rem;
@@ -814,5 +859,36 @@ a {
     }
     .cta-content h2 {
         font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .trust-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .heading {
+        font-size: 2rem;
+    }
+    .trust, .experiences, .featured, .timeline, .testimonials {
+        padding: 4rem 1rem;
+    }
+    .final-cta {
+        padding: 6rem 1rem;
+    }
+    .timeline-content {
+        padding: 2rem;
+    }
+    .card-content {
+        padding: 2rem;
+    }
+    .story-card {
+        width: 90vw;
+    }
+    .story-info h3 {
+        font-size: 2rem;
     }
 }

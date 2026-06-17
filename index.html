@@ -13,10 +13,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="brand">ORRA<span>EVENTS</span></a>
+            <div class="brand-wrapper">
+                <a href="#" class="brand">ORRA<span>EVENTS</span></a>
+                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="nav-social-icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
             <div class="nav-links">
                 <a href="#experiences">Experiences</a>
                 <a href="#featured">Stories</a>
@@ -118,8 +122,10 @@
             <span class="subheading">Portfolio</span>
             <h2 class="heading">Featured Stories</h2>
         </div>
-        <div class="horizontal-scroll-container">
-            <div class="story-track">
+        <div class="featured-scroll-wrapper">
+            <button class="scroll-btn prev-btn" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="horizontal-scroll-container" id="featured-scroll">
+                <div class="story-track">
                 <!-- Story 1 -->
                 <div class="story-card">
                     <img src="assets/images/Instagram_files/550797727_18061088288612013_8645432315869252439_n.jpg" alt="Lake Como Destination Wedding">
@@ -157,6 +163,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <button class="scroll-btn next-btn" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
     </section>
 

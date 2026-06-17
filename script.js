@@ -2,6 +2,29 @@ document.addEventListener('DOMContentLoaded', () => {
     // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
+    // Navbar Brand Text Cycling
+    const brandSpan = document.querySelector('.brand span');
+    if (brandSpan) {
+        const brandWords = ["EVENTS", "WEDDINGS", "PARTIES"];
+        let currentWordIndex = 0;
+
+        setInterval(() => {
+            currentWordIndex = (currentWordIndex + 1) % brandWords.length;
+            gsap.to(brandSpan, {
+                opacity: 0,
+                y: -10,
+                duration: 0.3,
+                onComplete: () => {
+                    brandSpan.textContent = brandWords[currentWordIndex];
+                    gsap.fromTo(brandSpan, 
+                        { opacity: 0, y: 10 },
+                        { opacity: 1, y: 0, duration: 0.3 }
+                    );
+                }
+            });
+        }, 3000);
+    }
+
     // Mobile Menu Toggle
     const mobileToggle = document.querySelector('.mobile-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -132,7 +155,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 pin: true,
                 scrub: 1,
                 start: "center center",
-                end: () => "+=" + track.scrollWidth
+                end: () => "+=" + track.scrollWidth,
+                id: "featuredScroll"
+            }
+        });
+    }
+
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const scrollContainer = document.querySelector('.horizontal-scroll-container');
+
+    if (prevBtn && nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            if (window.innerWidth > 768) {
+                const st = ScrollTrigger.getById("featuredScroll");
+                if (st) {
+                    const currentScroll = window.scrollY;
+                    const targetScroll = currentScroll + window.innerWidth * 0.5;
+                    window.scrollTo({
+                        top: Math.min(targetScroll, st.end),
+                        behavior: 'smooth'
+                    });
+                }
+            } else if (scrollContainer) {
+                scrollContainer.scrollBy({ left: window.innerWidth * 0.8, behavior: 'smooth' });
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (window.innerWidth > 768) {
+                const st = ScrollTrigger.getById("featuredScroll");
+                if (st) {
+                    const currentScroll = window.scrollY;
+                    const targetScroll = currentScroll - window.innerWidth * 0.5;
+                    window.scrollTo({
+                        top: Math.max(targetScroll, st.start),
+                        behavior: 'smooth'
+                    });
+                }
+            } else if (scrollContainer) {
+                scrollContainer.scrollBy({ left: -(window.innerWidth * 0.8), behavior: 'smooth' });
             }
         });
     }
